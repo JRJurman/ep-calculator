@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+
+		<!-- pico-css -->
+		<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2/css/pico.classless.min.css" />
+
+		<!-- Google Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<title>Perfect Draw! Effect Point Calculator</title>
+
+		<script src="https://unpkg.com/tram-deco@5"></script>
+		<script>
+			TramDeco.watch();
+		</script>
+
+		<template td-definitions> </template>
+
+		<link rel="stylesheet" href="./styles.css" />
+		<script defer src="./script.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>Perfect Draw! Effect Point Calculator</h1>
+
+			<table id="epTable">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Warrior</th>
+						<th>Item</th>
+						<th>Invocation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">Weak</th>
+						<td><button value="3">3EP</button></td>
+						<td><button value="4">4EP</button></td>
+						<td rowspan="3"><button value="3">3EP</button></td>
+					</tr>
+					<tr>
+						<th scope="row">Normal</th>
+						<td><button value="2">2EP</button></td>
+						<td><button value="3">3EP</button></td>
+					</tr>
+					<tr>
+						<th scope="row">Strong</th>
+						<td><button value="0">0EP</button></td>
+						<td><button value="1">1EP</button></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<section id="controls">
+				<button id="isAce">Ace</button>
+			</section>
+
+			<table id="effectTable">
+				<tbody>
+					<tr>
+						<td>
+							<input aria-label="first effect description" placeholder="..." />
+						</td>
+						<td>
+							<input ep-input id="first-ep-cost" type="number" size="2" value="0" />
+							<label for="first-ep-cost">EP Cost</label>
+						</td>
+					</tr>
+					<tr>
+						<td><input aria-label="second effect description" placeholder="..." /></td>
+						<td>
+							<input ep-input id="second-ep-cost" type="number" size="2" value="0" />
+							<label for="second-ep-cost">EP Cost</label>
+						</td>
+					</tr>
+					<tr>
+						<td><input aria-label="third effect description" placeholder="..." /></td>
+						<td>
+							<input ep-input id="third-ep-cost" type="number" size="2" value="0" />
+							<label for="third-ep-cost">EP Cost</label>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<span id="availableEPLabel"><span id="totalEPCost">0</span> EP / <span id="totalEPValue">0</span> EP</span>
+		</main>
+	</body>
+</html>

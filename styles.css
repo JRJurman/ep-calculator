@@ -1,0 +1,111 @@
+body {
+	font-family: Urbanist;
+	--pico-font-family: Urbanist;
+}
+
+main {
+	display: grid;
+	height: 100vh;
+	grid-template-rows: auto 1fr auto 1fr auto;
+	grid-template-areas:
+		'header'
+		'epTable'
+		'controls'
+		'effectTable'
+		'epLabel';
+	gap: 1em;
+}
+
+@media only screen and (min-width: 900px) {
+	main {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto auto auto;
+		grid-template-areas:
+			'header header'
+			'epTable effectTable'
+			'controls effectTable'
+			'epLabel epLabel';
+	}
+}
+
+h1 {
+	grid-area: header;
+	font-size: 1.7rem;
+	text-align: center;
+	text-wrap: balance;
+}
+
+#controls {
+	grid-area: controls;
+	display: flex;
+	justify-content: stretch;
+	gap: 1em;
+
+	button {
+		width: 100%;
+	}
+}
+
+#epTable {
+	grid-area: epTable;
+	height: 100%;
+
+	th {
+		--pico-font-weight: 600;
+	}
+	th,
+	td {
+		border: 0;
+	}
+	td button {
+		width: 100%;
+		height: 100%;
+	}
+	thead tr th {
+		text-align: center;
+	}
+}
+
+button {
+	background-color: inherit;
+	color: var(--pico-border-color);
+}
+button[selected] {
+	background-color: var(--pico-primary-background);
+	color: var(--pico-primary-inverse);
+}
+
+#availableEPLabel {
+	grid-area: epLabel;
+	display: block;
+	text-align: right;
+}
+
+#effectTable {
+	grid-area: effectTable;
+
+	input[type='number'] {
+		width: 4em;
+		margin-right: 1em;
+	}
+
+	tr {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 0.5em;
+	}
+
+	td {
+		padding: 0;
+	}
+
+	input {
+		margin: 0;
+		background: none;
+		border: none;
+	}
+
+	label {
+		display: inline;
+	}
+}
