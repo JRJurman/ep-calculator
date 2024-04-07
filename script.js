@@ -1,24 +1,32 @@
-// function to update the total Effect points available
-function updateAvailableEPLabel() {
+// function to get the total Effect points available
+function getTotalAvailableEP() {
 	// get EP from selected table button
 	const startingEP = epTable.querySelector('[selected]')?.getAttribute('value') || '0';
 
 	// check if isAce is checked
 	const aceEP = isAce.hasAttribute('selected') ? 1 : 0;
-	window.totalEPValue.textContent = parseInt(startingEP) + aceEP;
+	return parseInt(startingEP) + aceEP;
 }
 
-// function to update the total Effect Point cost
-function updateCostEPLabel() {
+// function to get the total Effect Point cost
+function getCostEP() {
 	const epEffectInputs = document.querySelectorAll('[ep-input]');
 	let cost = 0;
 	epEffectInputs.forEach((input) => {
 		cost += parseInt(input.value);
 	});
-	window.totalEPCost.textContent = cost;
+	return cost;
 }
 
-// update the top baseline EP table to trigger the `updateAvailableEPLabel`
+function updateEPLabel() {
+	const availableEP = getTotalAvailableEP();
+	const costEP = getCostEP();
+
+	window.epLabel.textContent = `${costEP} EP / ${availableEP} EP`;
+	window.epLabel.ariaLabel = `Cost: ${costEP} EP out of ${availableEP} EP`;
+}
+
+// update the top baseline EP table to trigger the `updateEPLabel`
 const tableButtons = window.epTable.querySelectorAll('button');
 tableButtons.forEach((button) => {
 	button.addEventListener('click', (event) => {
@@ -26,16 +34,16 @@ tableButtons.forEach((button) => {
 		event.target.setAttribute('selected', '');
 	});
 });
-tableButtons.forEach((button) => button.addEventListener('click', updateAvailableEPLabel));
+tableButtons.forEach((button) => button.addEventListener('click', updateEPLabel));
 
-// update the Ace button to also trigger the `updateAvailableEPLabel`
+// update the Ace button to also trigger the `updateEPLabel`
 isAce.addEventListener('click', () => {
 	isAce.toggleAttribute('selected');
 });
-isAce.addEventListener('click', updateAvailableEPLabel);
+isAce.addEventListener('click', updateEPLabel);
 
 // on any of the effect point selectors updating, update the EP cost
 const epEffectInputs = document.querySelectorAll('[ep-input]');
 epEffectInputs.forEach((input) => {
-	input.addEventListener('change', updateCostEPLabel);
+	input.addEventListener('change', updateEPLabel);
 });

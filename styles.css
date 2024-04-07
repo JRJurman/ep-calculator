@@ -75,7 +75,7 @@ button[selected] {
 	color: var(--pico-primary-inverse);
 }
 
-#availableEPLabel {
+#epLabel {
 	grid-area: epLabel;
 	display: block;
 	text-align: right;

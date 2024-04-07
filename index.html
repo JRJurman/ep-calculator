@@ -44,19 +44,19 @@
 				<tbody>
 					<tr>
 						<th scope="row">Weak</th>
-						<td><button value="3">3EP</button></td>
-						<td><button value="4">4EP</button></td>
-						<td rowspan="3"><button value="3">3EP</button></td>
+						<td><button aria-label="3 EP" value="3">3EP</button></td>
+						<td><button aria-label="4 EP" value="4">4EP</button></td>
+						<td rowspan="3"><button aria-label="3 EP" value="3">3EP</button></td>
 					</tr>
 					<tr>
 						<th scope="row">Normal</th>
-						<td><button value="2">2EP</button></td>
-						<td><button value="3">3EP</button></td>
+						<td><button aria-label="2 EP" value="2">2EP</button></td>
+						<td><button aria-label="3 EP" value="3">3EP</button></td>
 					</tr>
 					<tr>
 						<th scope="row">Strong</th>
-						<td><button value="0">0EP</button></td>
-						<td><button value="1">1EP</button></td>
+						<td><button aria-label="0 EP" value="0">0EP</button></td>
+						<td><button aria-label="1 EP" value="1">1EP</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -69,7 +69,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<input aria-label="first effect description" placeholder="..." />
+							<input aria-label="first effect description" placeholder="First Effect" />
 						</td>
 						<td>
 							<input ep-input id="first-ep-cost" type="number" size="2" value="0" />
@@ -77,14 +77,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td><input aria-label="second effect description" placeholder="..." /></td>
+						<td><input aria-label="second effect description" placeholder="Second Effect" /></td>
 						<td>
 							<input ep-input id="second-ep-cost" type="number" size="2" value="0" />
 							<label for="second-ep-cost">EP Cost</label>
 						</td>
 					</tr>
 					<tr>
-						<td><input aria-label="third effect description" placeholder="..." /></td>
+						<td><input aria-label="third effect description" placeholder="Third Effect" /></td>
 						<td>
 							<input ep-input id="third-ep-cost" type="number" size="2" value="0" />
 							<label for="third-ep-cost">EP Cost</label>
@@ -93,7 +93,7 @@
 				</tbody>
 			</table>
 
-			<span id="availableEPLabel"><span id="totalEPCost">0</span> EP / <span id="totalEPValue">0</span> EP</span>
+			<span aria-live="polite" id="epLabel" aria-label="0 EP out of 0 EP"> 0 EP / 0 EP </span>
 		</main>
 	</body>
 </html>
