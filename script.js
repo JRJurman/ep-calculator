@@ -10,12 +10,12 @@ function getTotalAvailableEP() {
 
 // function to get the total Effect Point cost
 function getCostEP() {
-	const epEffectInputs = document.querySelectorAll('[ep-input]');
-	let cost = 0;
-	epEffectInputs.forEach((input) => {
-		cost += parseInt(input.value);
-	});
-	return cost;
+	const powerfulEPValue = +powerfulEP.getAttribute('value');
+	const versatileEPValue = +versatileEP.getAttribute('value');
+	const weaknessEPValue = +weaknessEP.getAttribute('value');
+	const consistentEPValue = consistentEP.hasAttribute('selected') ? 1 : 0;
+	const gimmickEPValue = gimmickEP.hasAttribute('selected') ? -1 : 0;
+	return powerfulEPValue + versatileEPValue + weaknessEPValue + consistentEPValue + gimmickEPValue;
 }
 
 function updateEPLabel() {
@@ -26,12 +26,13 @@ function updateEPLabel() {
 	window.epLabel.ariaLabel = `Cost: ${costEP} EP out of ${availableEP} EP`;
 }
 
-// update the top baseline EP table to trigger the `updateEPLabel`
-const tableButtons = window.epTable.querySelectorAll('ep-radio-button');
-tableButtons.forEach((button) => button.addEventListener('click', updateEPLabel));
-
-// update the Ace button to also trigger the `updateEPLabel`
-isAce.addEventListener('click', updateEPLabel);
+// have all controls trigger updateEPLabel
+const radioButtons = document.querySelectorAll('ep-radio-button');
+const checkButtons = document.querySelectorAll('ep-check-button');
+const counterButtons = document.querySelectorAll('ep-button-counter');
+[...radioButtons, ...checkButtons, ...counterButtons].forEach((button) =>
+	button.addEventListener('click', updateEPLabel)
+);
 
 // on any of the effect selections being focused, update the side-panel
 [...effectSelection.children].forEach((effectControl) => {
