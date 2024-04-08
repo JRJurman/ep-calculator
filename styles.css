@@ -1,62 +1,64 @@
 body {
+	height: 100vh;
+	margin: 0;
 	font-family: Urbanist;
-	--pico-font-family: Urbanist;
+	--dark-color: #393d3d;
+	--spacing: 0.3em;
 }
 
 main {
 	display: grid;
-	height: 100vh;
-	grid-template-rows: auto 1fr auto 1fr auto;
-	grid-template-areas:
-		'header'
-		'epTable'
-		'controls'
-		'effectTable'
-		'epLabel';
-	gap: 1em;
+	height: 100%;
+	width: 100%;
 }
 
-@media only screen and (min-width: 900px) {
-	main {
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: auto auto auto;
-		grid-template-areas:
-			'header header'
-			'epTable effectTable'
-			'controls effectTable'
-			'epLabel epLabel';
+main {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 3fr 1fr 3fr auto;
+	grid-template-areas:
+		'epTable epTable'
+		'controls controls'
+		'effectSelection effectDescription'
+		'epLabel epLabel';
+	gap: var(--spacing);
+}
+
+table {
+	width: 100%;
+}
+
+table ep-radio-button::part(button) {
+	border: 0;
+}
+
+ep-radio-button + ep-radio-button {
+	&::part(button) {
+		border-top: 0;
 	}
 }
 
-h1 {
-	grid-area: header;
-	font-size: 1.7rem;
-	text-align: center;
-	text-wrap: balance;
+table,
+th,
+td {
+	border: 3px solid var(--dark-color);
+	border-collapse: collapse;
+}
+
+th {
+	background: var(--dark-color);
+	color: white;
 }
 
 #controls {
 	grid-area: controls;
-	display: flex;
-	justify-content: stretch;
-	gap: 1em;
+}
 
-	button {
-		width: 100%;
-	}
+#baseEPRadioGroup {
+	grid-area: epTable;
 }
 
 #epTable {
-	grid-area: epTable;
 	height: 100%;
-
-	th {
-		--pico-font-weight: 600;
-	}
-	th,
-	td {
-		border: 0;
-	}
 	td button {
 		width: 100%;
 		height: 100%;
@@ -66,46 +68,28 @@ h1 {
 	}
 }
 
-button {
-	background-color: inherit;
-	color: var(--pico-border-color);
-}
-button[selected] {
-	background-color: var(--pico-primary-background);
-	color: var(--pico-primary-inverse);
+[role='group'] {
+	margin: 0;
 }
 
 #epLabel {
 	grid-area: epLabel;
 	display: block;
 	text-align: right;
+	margin-right: 3em;
+	margin-bottom: 1em;
 }
 
-#effectTable {
-	grid-area: effectTable;
+#effectSelection {
+	grid-area: effectSelection;
+	display: grid;
+	gap: var(--spacing);
 
-	input[type='number'] {
-		width: 4em;
-		margin-right: 1em;
-	}
-
-	tr {
+	ep-radio-button-group {
 		display: grid;
-		grid-template-columns: 1fr auto;
-		gap: 0.5em;
 	}
+}
 
-	td {
-		padding: 0;
-	}
-
-	input {
-		margin: 0;
-		background: none;
-		border: none;
-	}
-
-	label {
-		display: inline;
-	}
+#effectDescription {
+	grid-area: effectDescription;
 }

@@ -3,10 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="color-scheme" content="light dark" />
-
-		<!-- pico-css -->
-		<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2/css/pico.classless.min.css" />
+		<meta name="color-scheme" content="light" />
 
 		<!-- Google Font -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,75 +20,168 @@
 			TramDeco.watch();
 		</script>
 
-		<template td-definitions> </template>
+		<template td-definitions>
+			<ep-check-button>
+				<template shadowrootmode="open">
+					<link rel="stylesheet" href="./component.css" />
+					<button>
+						<slot></slot>
+					</button>
+				</template>
+				<script td-method="constructor">
+					this.button = this.shadowRoot.querySelector('button');
+				</script>
+				<script td-method="connectedCallback">
+					this.button.addEventListener('click', () => {
+						this.toggleAttribute('selected');
+						this.button.toggleAttribute('selected');
+					});
+				</script>
+			</ep-check-button>
+
+			<ep-button-counter>
+				<script td-property="observedAttributes">
+					['value'];
+				</script>
+				<template shadowrootmode="open">
+					<link rel="stylesheet" href="./component.css" />
+
+					<style>
+						div[role='group'] {
+							height: 100%;
+							margin: 0;
+							display: grid;
+							grid-template-columns: 80% 20%;
+						}
+					</style>
+
+					<div role="group" counter>
+						<button><slot></slot></button>
+						<input type="number" min="0" max="8" value="0" />
+					</div>
+				</template>
+				<script td-method="constructor">
+					this.input = this.shadowRoot.querySelector('input');
+					this.button = this.shadowRoot.querySelector('button');
+				</script>
+				<script td-method="connectedCallback">
+					this.input.addEventListener('input', () => {
+						this.setAttribute('value', this.input.value);
+					});
+					this.button.addEventListener('click', () => {
+						this.setAttribute('value', +this.getAttribute('value') + 1);
+					});
+				</script>
+				<script td-method="attributeChangedCallback">
+					this.input.value = this.getAttribute('value');
+					if (this.input.value > 0) {
+						this.button.setAttribute('selected', '');
+					} else {
+						this.button.removeAttribute('selected');
+					}
+				</script>
+			</ep-button-counter>
+
+			<ep-radio-button>
+				<script td-property="observedAttributes">
+					['selected'];
+				</script>
+				<template shadowrootmode="open">
+					<link rel="stylesheet" href="./component.css" />
+
+					<style>
+						button {
+							background-color: inherit;
+							width: 100%;
+							height: 100%;
+							color: var(--pico-border-color);
+						}
+						button[selected] {
+							background-color: var(--pico-primary-background);
+							color: var(--pico-primary-inverse);
+						}
+					</style>
+
+					<button part="button"><slot></slot></button>
+				</template>
+				<script td-method="connectedCallback">
+					this.button = this.shadowRoot.querySelector('button');
+					this.radioGroup = this.closest('ep-radio-button-group');
+					this.button.addEventListener('click', () => {
+						const wasSelected = this.hasAttribute('selected');
+						[...this.radioGroup.querySelectorAll('ep-radio-button')].forEach((button) =>
+							button.removeAttribute('selected')
+						);
+						if (!wasSelected) {
+							this.setAttribute('selected', '');
+						} else {
+							this.setAttribute('value', 0);
+						}
+						this.radioGroup.setAttribute('value', this.getAttribute('value'));
+					});
+				</script>
+				<script td-method="attributeChangedCallback">
+					if (this.hasAttribute('selected')) {
+						this.button.setAttribute('selected', '');
+					} else {
+						this.button.removeAttribute('selected');
+					}
+				</script>
+			</ep-radio-button>
+		</template>
 
 		<link rel="stylesheet" href="./styles.css" />
+		<link rel="stylesheet" href="./component.css" />
 		<script defer src="./script.js"></script>
 	</head>
 	<body>
 		<main>
-			<h1>Perfect Draw! Effect Point Calculator</h1>
-
-			<table id="epTable">
-				<thead>
-					<tr>
-						<th></th>
-						<th>Warrior</th>
-						<th>Item</th>
-						<th>Invocation</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">Weak</th>
-						<td><button aria-label="3 EP" value="3">3EP</button></td>
-						<td><button aria-label="4 EP" value="4">4EP</button></td>
-						<td rowspan="3"><button aria-label="3 EP" value="3">3EP</button></td>
-					</tr>
-					<tr>
-						<th scope="row">Normal</th>
-						<td><button aria-label="2 EP" value="2">2EP</button></td>
-						<td><button aria-label="3 EP" value="3">3EP</button></td>
-					</tr>
-					<tr>
-						<th scope="row">Strong</th>
-						<td><button aria-label="0 EP" value="0">0EP</button></td>
-						<td><button aria-label="1 EP" value="1">1EP</button></td>
-					</tr>
-				</tbody>
-			</table>
+			<ep-radio-button-group id="baseEPRadioGroup">
+				<table id="epTable">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Warrior</th>
+							<th>Item</th>
+							<th>Invocation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Weak</th>
+							<td><ep-radio-button aria-label="3 EP" value="3">3EP</ep-radio-button></td>
+							<td><ep-radio-button aria-label="4 EP" value="4">4EP</ep-radio-button></td>
+							<td rowspan="3"><ep-radio-button aria-label="3 EP" value="3">3EP</ep-radio-button></td>
+						</tr>
+						<tr>
+							<th scope="row">Normal</th>
+							<td><ep-radio-button aria-label="2 EP" value="2">2EP</ep-radio-button></td>
+							<td><ep-radio-button aria-label="3 EP" value="3">3EP</ep-radio-button></td>
+						</tr>
+						<tr>
+							<th scope="row">Strong</th>
+							<td><ep-radio-button aria-label="0 EP" value="0">0EP</ep-radio-button></td>
+							<td><ep-radio-button aria-label="1 EP" value="1">1EP</ep-radio-button></td>
+						</tr>
+					</tbody>
+				</table>
+			</ep-radio-button-group>
 
 			<section id="controls">
-				<button id="isAce">Ace</button>
+				<ep-check-button id="isAce">Ace (+1)</ep-check-button>
 			</section>
 
-			<table id="effectTable">
-				<tbody>
-					<tr>
-						<td>
-							<input aria-label="first effect description" placeholder="First Effect" />
-						</td>
-						<td>
-							<input ep-input id="first-ep-cost" type="number" size="2" value="0" />
-							<label for="first-ep-cost">EP Cost</label>
-						</td>
-					</tr>
-					<tr>
-						<td><input aria-label="second effect description" placeholder="Second Effect" /></td>
-						<td>
-							<input ep-input id="second-ep-cost" type="number" size="2" value="0" />
-							<label for="second-ep-cost">EP Cost</label>
-						</td>
-					</tr>
-					<tr>
-						<td><input aria-label="third effect description" placeholder="Third Effect" /></td>
-						<td>
-							<input ep-input id="third-ep-cost" type="number" size="2" value="0" />
-							<label for="third-ep-cost">EP Cost</label>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div id="effectSelection">
+				<ep-button-counter> Powerful </ep-button-counter>
+				<ep-button-counter> Versatile </ep-button-counter>
+				<ep-radio-button-group>
+					<ep-radio-button value="-1">Weakness</ep-radio-button>
+					<ep-radio-button value="-2">Significant<br />Weakness</ep-radio-button>
+				</ep-radio-button-group>
+				<ep-check-button>Consistent</ep-check-button>
+				<ep-check-button>Gimmick</ep-check-button>
+			</div>
+			<div id="effectDescription" aria-live="polite"></div>
 
 			<span aria-live="polite" id="epLabel" aria-label="0 EP out of 0 EP"> 0 EP / 0 EP </span>
 		</main>
