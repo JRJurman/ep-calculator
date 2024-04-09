@@ -3,6 +3,7 @@ body {
 	background: black;
 	font-family: Urbanist;
 	margin: 0;
+	font-size: clamp(14px, 2vw, 20px);
 
 	--dark-color: #393d3d;
 	--spacing: 0.3em;
@@ -15,14 +16,14 @@ main {
 
 	width: calc(100% - 24px);
 	height: calc(100% - 24px);
-	border: 12px solid var(--dark-color);
+	border: 12px solid white;
 	border-radius: 12px;
 	max-width: 800px;
 }
 
 main {
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 3fr 1fr 3fr auto;
+	grid-template-rows: 4fr 1fr 4fr auto;
 	grid-template-areas:
 		'epTable epTable'
 		'controls controls'
@@ -103,6 +104,8 @@ th {
 #effectDescription {
 	grid-area: effectDescription;
 	margin: 1em;
+	overflow: scroll;
+	font-size: clamp(8px, 2vw, 13px);
 
 	/* section {
 		display: none;
