@@ -1,15 +1,23 @@
 body {
 	height: 100vh;
-	margin: 0;
+	background: black;
 	font-family: Urbanist;
+	margin: 0;
+
 	--dark-color: #393d3d;
 	--spacing: 0.3em;
 }
 
 main {
+	background: white;
 	display: grid;
-	height: 100%;
-	width: 100%;
+	margin: auto;
+
+	width: calc(100% - 24px);
+	height: calc(100% - 24px);
+	border: 12px solid var(--dark-color);
+	border-radius: 12px;
+	max-width: 800px;
 }
 
 main {
@@ -73,6 +81,8 @@ th {
 }
 
 #epLabel {
+	font-weight: bold;
+	font-size: 1.2em;
 	grid-area: epLabel;
 	display: block;
 	text-align: right;
@@ -92,4 +102,9 @@ th {
 
 #effectDescription {
 	grid-area: effectDescription;
+	margin: 1em;
+
+	/* section {
+		display: none;
+	} */
 }

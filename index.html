@@ -86,7 +86,7 @@
 				<script td-property="observedAttributes">
 					['selected'];
 				</script>
-				<template shadowrootmode="open">
+				<template shadowrootmode="open" shadowrootdelegatesfocus>
 					<link rel="stylesheet" href="./component.css" />
 
 					<style>
@@ -114,10 +114,10 @@
 						);
 						if (!wasSelected) {
 							this.setAttribute('selected', '');
+							this.radioGroup.setAttribute('value', this.getAttribute('value'));
 						} else {
-							this.setAttribute('value', 0);
+							this.radioGroup.setAttribute('value', 0);
 						}
-						this.radioGroup.setAttribute('value', this.getAttribute('value'));
 					});
 				</script>
 				<script td-method="attributeChangedCallback">
@@ -172,16 +172,40 @@
 			</section>
 
 			<div id="effectSelection">
-				<ep-button-counter id="powerfulEP"> Powerful </ep-button-counter>
-				<ep-button-counter id="versatileEP"> Versatile </ep-button-counter>
+				<ep-button-counter id="powerfulEP" description="powerful"> Powerful </ep-button-counter>
+				<ep-button-counter id="versatileEP" description="versatile"> Versatile </ep-button-counter>
 				<ep-radio-button-group id="weaknessEP">
-					<ep-radio-button value="-1">Weakness</ep-radio-button>
-					<ep-radio-button value="-2">Significant<br />Weakness</ep-radio-button>
+					<ep-radio-button description="weakness" value="-1">Weakness</ep-radio-button>
+					<ep-radio-button description="significant-weakness" value="-2">Significant<br />Weakness</ep-radio-button>
 				</ep-radio-button-group>
-				<ep-check-button id="consistentEP">Consistent</ep-check-button>
-				<ep-check-button id="gimmickEP">Gimmick</ep-check-button>
+				<ep-check-button id="consistentEP" description="consistent">Consistent</ep-check-button>
+				<ep-check-button id="gimmickEP" description="gimmick">Gimmick</ep-check-button>
 			</div>
-			<div id="effectDescription" aria-live="polite"></div>
+			<div id="effectDescription" aria-live="polite">
+				<section category="powerful">
+					Effects are <b>powerful</b> if they:
+					<ul>
+						<li>Grants additional card advantage</li>
+						<li>Brings you closer to winning</li>
+						<li>Makes it harder for your opponent to win</li>
+						<li>Changes the rules of the game</li>
+						<li>Presents a problem that needs to be solved</li>
+					</ul>
+
+					<p>
+						Powerful 1 includes: dealing a single point of damage, creating a {Normal} warrior, a single instance of
+						most keywords...
+					</p>
+					<p>
+						Powerful 2 includes: dealing two points of damage, creating a {Strong} warrior, additional attacks, drawing
+						2 cards, a Powerful 1 ability every turn, lifesteal, creating 3 warriors...
+					</p>
+				</section>
+				<section category="versatile"></section>
+				<section category="weakness"></section>
+				<section category="consistent"></section>
+				<section category="gimmick"></section>
+			</div>
 
 			<span aria-live="polite" id="epLabel" aria-label="0 EP out of 0 EP"> 0 EP / 0 EP </span>
 		</main>
