@@ -107,7 +107,7 @@ th {
 	overflow: scroll;
 	font-size: clamp(8px, 2vw, 13px);
 
-	/* section {
+	section {
 		display: none;
-	} */
+	}
 }

@@ -176,35 +176,83 @@
 				<ep-button-counter id="versatileEP" description="versatile"> Versatile </ep-button-counter>
 				<ep-radio-button-group id="weaknessEP">
 					<ep-radio-button description="weakness" value="-1">Weakness</ep-radio-button>
-					<ep-radio-button description="significant-weakness" value="-2">Significant<br />Weakness</ep-radio-button>
+					<ep-radio-button description="weakness" value="-2">Significant<br />Weakness</ep-radio-button>
 				</ep-radio-button-group>
 				<ep-check-button id="consistentEP" description="consistent">Consistent</ep-check-button>
 				<ep-check-button id="gimmickEP" description="gimmick">Gimmick</ep-check-button>
 			</div>
 			<div id="effectDescription" aria-live="polite">
 				<section category="powerful">
-					Effects are <b>powerful</b> if they:
+					Effects are <b>Powerful</b> if they:
 					<ul>
-						<li>Grants additional card advantage</li>
-						<li>Brings you closer to winning</li>
-						<li>Makes it harder for your opponent to win</li>
-						<li>Changes the rules of the game</li>
-						<li>Presents a problem that needs to be solved</li>
+						<li>Grant additional card advantage</li>
+						<li>Bring you closer to winning</li>
+						<li>Make it harder for your opponent to win</li>
+						<li>Change the rules of the game</li>
+						<li>Present a problem that needs to be solved</li>
 					</ul>
 
 					<p>
-						<b>Powerful 1</b> includes: dealing a single point of damage, creating a {Normal} warrior, a single instance
-						of most keywords...
+						<b>Powerful 1</b> includes: dealing a single point of damage; creating a {Normal} warrior; a single instance
+						of most keywords.
 					</p>
 					<p>
-						<b>Powerful 2</b> includes: dealing two points of damage, creating a {Strong} warrior, additional attacks,
-						drawing 2 cards, a Powerful 1 ability every turn, lifesteal, creating 3 warriors...
+						<b>Powerful 2</b> includes: dealing two points of damage; creating a {Strong} warrior; additional attacks;
+						drawing 2 cards; a Powerful 1 ability every turn; lifesteal; creating 3 warriors.
 					</p>
 				</section>
-				<section category="versatile"></section>
-				<section category="weakness"></section>
-				<section category="consistent"></section>
-				<section category="gimmick"></section>
+				<section category="versatile">
+					Cards are <b>Versatile</b> if they:
+					<ul>
+						<li>Give you the option to do multiple things</li>
+						<li>Have multiple different ways they can be used</li>
+						<li>Let you make any kind of choice or pick a specific target</li>
+					</ul>
+
+					<p>
+						<b>Versatile 1</b> includes: choosing a target warrior for an effect; choosing between two effects on a
+						card; choosing between items, warriors, or invocations; searching for a card in your deck;
+					</p>
+					<p>
+						<b>Versatile 2</b> includes: choosing two warriors for an effect; choosing between three effects on a card;
+						two instances of Versatile 1;
+					</p>
+				</section>
+				<section category="weakness">
+					Effects have a <b>Weakness</b> or <b>Significant Weakness</b> if they:
+					<ul>
+						<li>Present a meaningful downside</li>
+						<li>Give your opponent a meaningful benefit</li>
+					</ul>
+
+					<p>
+						<b>Weakness</b> includes: the {Underwhelm} keyword; must attack each turn; losing a single life on playing;
+						not being able to attack;
+					</p>
+					<p>
+						<b>Signficant Weakness</b> includes: the {Overwork} keyword; giving all opponent warriors a keyword;
+						destroying all warriors and items you control; not being able to play before turn 3; losing life each turn;
+					</p>
+				</section>
+				<section category="consistent">
+					Cards are <b>Consistent</b> if they:
+					<ul>
+						<li>Require no setup</li>
+						<li>Are useful under multiple conditions</li>
+						<li>Would be good at the beginning of a match, and at the very end of a match</li>
+					</ul>
+
+					<p>
+						<b>Consistent</b> includes: destroying opponent warriors; dealing a single point of damage; attacking
+						multiple times; certain keywords (like {Pressure}, {Blocker}); drawing cards; returning cards to hand;
+						taking control of an opponent warrior; gaining life; direct attacks; starting at the top of a deck; creating
+						token warriors;
+					</p>
+				</section>
+				<section category="gimmick">
+					You can reduce the total Effect Point cost of a card if one of the effects leans into the overall playstyle of
+					the deck (your Gimmick). You can only reduce this cost once per card.
+				</section>
 			</div>
 
 			<span aria-live="polite" id="epLabel" aria-label="0 EP out of 0 EP"> 0 EP / 0 EP </span>

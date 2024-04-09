@@ -37,7 +37,14 @@ const counterButtons = document.querySelectorAll('ep-button-counter');
 // on any of the effect selections being focused, update the side-panel
 effectSelection.querySelectorAll('ep-button-counter, ep-radio-button, ep-check-button').forEach((effectControl) => {
 	effectControl.addEventListener('focus', (event) => {
+		// hide all description blocks
+		effectDescription.querySelectorAll('[category]').forEach((descriptionBlock) => {
+			descriptionBlock.style.display = '';
+		});
+
+		// get the target description block and set the display to block
 		const category = event.target.getAttribute('description');
-		console.log({ category });
+		const descriptionBlock = effectDescription.querySelector(`[category=${category}]`);
+		descriptionBlock.style.display = 'block';
 	});
 });
