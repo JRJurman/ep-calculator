@@ -22,9 +22,9 @@
 
 		<template td-definitions>
 			<ep-check-button>
-				<template shadowrootmode="open">
+				<template shadowrootmode="open" shadowrootdelegatesfocus>
 					<link rel="stylesheet" href="./component.css" />
-					<button>
+					<button tabindex="1">
 						<slot></slot>
 					</button>
 				</template>
@@ -43,7 +43,7 @@
 				<script td-property="observedAttributes">
 					['value'];
 				</script>
-				<template shadowrootmode="open">
+				<template shadowrootmode="open" shadowrootdelegatesfocus>
 					<link rel="stylesheet" href="./component.css" />
 
 					<style>
@@ -56,7 +56,7 @@
 					</style>
 
 					<div role="group" counter>
-						<button><slot></slot></button>
+						<button tabindex="1"><slot></slot></button>
 						<input type="number" min="0" max="8" value="0" />
 					</div>
 				</template>
@@ -102,7 +102,7 @@
 						}
 					</style>
 
-					<button part="button"><slot></slot></button>
+					<button part="button" tabindex="1"><slot></slot></button>
 				</template>
 				<script td-method="connectedCallback">
 					this.button = this.shadowRoot.querySelector('button');
@@ -251,7 +251,7 @@
 				</section>
 				<section category="gimmick">
 					You can reduce the total Effect Point cost of a card if one of the effects leans into the overall playstyle of
-					the deck (your Gimmick). You can only reduce this cost once per card.
+					the deck - your <b>Gimmick</b>. You can only reduce this cost once per card.
 				</section>
 			</div>
 
